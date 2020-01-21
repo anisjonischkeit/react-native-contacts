@@ -56,6 +56,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
 
     private static final int REQUEST_OPEN_CONTACT_FORM = 52941;
     private static final int REQUEST_OPEN_EXISTING_CONTACT = 52942;
+    private static final int REQUEST_OPEN_CONTACT_PICKER = 52944;
 
     private static Callback updateContactCallback;
     private static Callback requestCallback;
@@ -481,6 +482,21 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
 
             updateContactCallback = callback;
             getReactApplicationContext().startActivityForResult(intent, REQUEST_OPEN_EXISTING_CONTACT, Bundle.EMPTY);
+
+        } catch (Exception e) {
+            callback.invoke(e.toString());
+        }
+    }
+
+    @ReactMethod
+    public void openContactPicker(Callback callback) {
+        try {
+            Uri uri = ContactsContract.Contacts.CONTENT_URI;
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setDataAndType(uri, ContactsContract.Contacts.CONTENT_TYPE);
+
+            updateContactCallback = callback;
+            getReactApplicationContext().startActivityForResult(intent, REQUEST_OPEN_CONTACT_PICKER, Bundle.EMPTY);
 
         } catch (Exception e) {
             callback.invoke(e.toString());
@@ -1115,7 +1131,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
      */
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQUEST_OPEN_CONTACT_FORM && requestCode != REQUEST_OPEN_EXISTING_CONTACT) {
+        if (requestCode != REQUEST_OPEN_CONTACT_FORM && requestCode != REQUEST_OPEN_EXISTING_CONTACT && requestCode != REQUEST_OPEN_CONTACT_PICKER ) {
             return;
         }
 

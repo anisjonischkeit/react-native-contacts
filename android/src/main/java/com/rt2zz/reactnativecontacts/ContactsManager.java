@@ -506,6 +506,7 @@ public class ContactsManager extends ReactContextBaseJavaModule implements Activ
         }
     }
 
+    @ReactMethod
     public void openContactPicker(Callback callback) {
         try {
             Uri uri = ContactsContract.Contacts.CONTENT_URI;

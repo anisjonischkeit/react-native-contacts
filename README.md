@@ -4,6 +4,8 @@ To contribute read [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Ask questions on [stackoverflow](https://stackoverflow.com/questions/tagged/react-native-contacts) not the issue tracker.
 
+For usage within reasonml see [bs-react-native-contacts-android-only](https://github.com/anisjonischkeit/bs-react-native-contacts-android-only)
+
 ## Usage
 `getAll` is a database intensive process, and can take a long time to complete depending on the size of the contacts list. Because of this, it is recommended you access the `getAll` method before it is needed, and cache the results for future use.
 ```es
